@@ -1,6 +1,6 @@
-﻿using System;
+﻿using ProposalValidator.Domain.Models;
+using System;
 using System.Collections.Generic;
-using ConsoleApp4.Models;
 
 namespace ProposalValidator.Domain.Proposals.Validators.Events
 {

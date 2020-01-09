@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ConsoleApp4.Models;
+using ProposalValidator.Domain.Models;
 
 namespace ProposalValidator.Domain.Proposals.Validators
 {

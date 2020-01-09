@@ -1,4 +1,5 @@
-﻿using ConsoleApp4.Models;
+﻿
+using ProposalValidator.Domain.Models;
 
 namespace ProposalValidator.Domain.Proposals.Validators
 {

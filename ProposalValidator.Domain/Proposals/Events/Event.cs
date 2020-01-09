@@ -1,4 +1,5 @@
 ﻿using ProposalValidator.Domain.Constants;
+using ProposalValidator.Domain.Exceptions;
 using ProposalValidator.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,7 @@ namespace ProposalValidator.Domain.Proposals.Validators.Events
                 (SchemaConst.PROPONENT, ActionsConst.ADDED) => new ProponentAddedEvent(eventData),
                 (SchemaConst.PROPONENT, ActionsConst.UPDATED) => new ProponentUpdatedEvent(eventData),
                 (SchemaConst.PROPONENT, ActionsConst.REMOVED) => new ProponentRemovedEvent(eventData),
-                _ => throw new ArgumentException(message: $"There is no event {schema} {action} registered", paramNa),
+                _ => throw new BusinessException($"There is no event {schema} {action} registered"),
             };
         }
 

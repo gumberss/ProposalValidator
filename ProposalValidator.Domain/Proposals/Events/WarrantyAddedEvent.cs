@@ -1,4 +1,5 @@
 ﻿using ProposalValidator.Domain.Models;
+using System.Collections.Generic;
 
 namespace ProposalValidator.Domain.Proposals.Validators.Events
 {
@@ -8,7 +9,7 @@ namespace ProposalValidator.Domain.Proposals.Validators.Events
         {
         }
 
-        public override void Change(System.Collections.Generic.List<Proposal> proposals)
+        public override void Change(ref List<Proposal> proposals)
         {
             throw new System.NotImplementedException();
         }
