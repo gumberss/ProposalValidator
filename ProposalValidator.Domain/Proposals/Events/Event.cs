@@ -46,7 +46,7 @@ namespace ProposalValidator.Domain.Proposals.Validators.Events
             ProposalId = Guid.Parse(data[PROPOSAL_ID_POSITION]);
         }
 
-        protected static CultureInfo _cultureInfo = new CultureInfo("EN-us");
+        protected static readonly CultureInfo _cultureInfo = new CultureInfo("EN-us");
 
         public Guid Id { get; private set; }
 
