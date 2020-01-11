@@ -32,7 +32,7 @@ namespace ProposalValidator.Domain.Proposals.Events
                 (SchemaConst.PROPONENT, ActionsConst.ADDED) => new ProponentAddedEvent(eventData),
                 (SchemaConst.PROPONENT, ActionsConst.UPDATED) => new ProponentUpdatedEvent(eventData),
                 (SchemaConst.PROPONENT, ActionsConst.REMOVED) => new ProponentRemovedEvent(eventData),
-                _ => throw new BusinessException($"There is no event {schema} {action} registered"),
+                _ => throw new BusinessException($"There is no event for schema: {schema} action: {action} registered"),
             };
         }
 
