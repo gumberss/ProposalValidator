@@ -7,7 +7,7 @@ namespace ProposalValidator.Domain.Proposals.Validators
     {
         protected override bool ValitationWrapper(Proposal proposal)
         {
-            return proposal.Proponents.All(x => x.Age > 18);
+            return proposal.Proponents.All(x => x.Age >= 18);
         }
     }
 }
