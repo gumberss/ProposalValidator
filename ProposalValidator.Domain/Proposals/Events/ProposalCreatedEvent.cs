@@ -6,18 +6,21 @@ namespace ProposalValidator.Domain.Proposals.Events
 {
     public class ProposalCreatedEvent : Event
     {
+        private const int PROPOSAL_LOAN_VALUE = 5;
+        private const int PROPOSAL_NUMBER_OF_MONTHLY_INSTALLMENTS = 6;
+
         public ProposalCreatedEvent(String[] data) : base(data)
         {
-            ProposalLoanValue = decimal.Parse(data[5], _cultureInfo);
-            ProposalNumberOfMonthlyInstallments = int.Parse(data[6]);
+            _proposalLoanValue = decimal.Parse(data[PROPOSAL_LOAN_VALUE], _cultureInfo);
+            _proposalNumberOfMonthlyInstallments = int.Parse(data[PROPOSAL_NUMBER_OF_MONTHLY_INSTALLMENTS]);
         }
 
-        public decimal ProposalLoanValue { get; set; }
-        public int ProposalNumberOfMonthlyInstallments { get; set; }
+        private decimal _proposalLoanValue { get; set; }
+        private int _proposalNumberOfMonthlyInstallments { get; set; }
 
         public override void Change(ref List<Proposal> proposals)
         {
-            Proposal newProposal = new Proposal(ProposalId, ProposalLoanValue, ProposalNumberOfMonthlyInstallments);
+            Proposal newProposal = new Proposal(_proposalId, _proposalLoanValue, _proposalNumberOfMonthlyInstallments);
 
             proposals.Add(newProposal);
         }

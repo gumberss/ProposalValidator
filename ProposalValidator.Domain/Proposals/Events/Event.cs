@@ -9,11 +9,11 @@ namespace ProposalValidator.Domain.Proposals.Events
 {
     public abstract class Event
     {
-        private static readonly int ID_POSITION = 0;
-        private static readonly int SCHEMA_POSITION = 1;
-        private static readonly int ACTION_POSITION = 2;
-        private static readonly int TIMESTAMP_POSITION = 3;
-        private static readonly int PROPOSAL_ID_POSITION = 4;
+        private const int ID_POSITION = 0;
+        private const int SCHEMA_POSITION = 1;
+        private const int ACTION_POSITION = 2;
+        private const int TIMESTAMP_POSITION = 3;
+        private const int PROPOSAL_ID_POSITION = 4;
 
         public static Event Create(String stringEvent)
         {
@@ -43,20 +43,20 @@ namespace ProposalValidator.Domain.Proposals.Events
             Schema = data[SCHEMA_POSITION];
             Action = data[ACTION_POSITION];
             Timestamp = DateTime.Parse(data[TIMESTAMP_POSITION]);
-            ProposalId = Guid.Parse(data[PROPOSAL_ID_POSITION]);
+            _proposalId = Guid.Parse(data[PROPOSAL_ID_POSITION]);
         }
 
         protected static readonly CultureInfo _cultureInfo = new CultureInfo("EN-us");
 
-        public Guid Id { get; private set; }
+        public Guid Id { get; set; }
 
-        public String Schema { get; private set; }
+        public String Schema { get; set; }
 
-        public String Action { get; private set; }
+        public String Action { get; set; }
 
-        public DateTime Timestamp { get; private set; }
+        public DateTime Timestamp { get; set; }
 
-        public Guid ProposalId { get; private set; }
+        protected readonly Guid _proposalId;
 
         public abstract void Change(ref List<Proposal> proposals);
     }
