@@ -3,8 +3,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ProposalValidator.Domain.Models;
 using ProposalValidator.Domain.Proposals.Validators;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ProposalValidator.Domain.Test.Proposals.Validators
 {
@@ -23,7 +21,7 @@ namespace ProposalValidator.Domain.Test.Proposals.Validators
         [DataRow(2 * 12, true, "O empréstimo deve ser pago no mínimo em 2 anos")]
         [DataRow(15 * 12, true, "O empréstimo pode ser pago em até 15 anos")]
         [DataRow(15 * 12 + 1, false, "O empréstimo possui limite máximo de 15 anos para ser pago")]
-        public void Deveria_validar_corretamente_o_periodo_do_emprestimo(int months,bool expected, String because)
+        public void Deveria_validar_corretamente_o_periodo_do_emprestimo(int months, bool expected, String because)
         {
             var proposal = new Proposal(Guid.NewGuid(), 0, months);
 

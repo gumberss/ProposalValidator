@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ProposalValidator.Domain.Models;
+﻿using ProposalValidator.Domain.Models;
 
 namespace ProposalValidator.Domain.Proposals.Validators
 {
-    public class MinimunProponentQuantityValidator : BaseValidator
+    public class MinimumProponentQuantityValidator : BaseValidator
     {
         protected override bool ValitationWrapper(Proposal proposal)
         {

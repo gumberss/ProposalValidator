@@ -28,7 +28,7 @@ namespace ProposalValidator.Handler.Handlers
 
             validatorChain
                 .SetNext(new LoanMonthlyInStallmentsValidator())
-                .SetNext(new MinimunProponentQuantityValidator())
+                .SetNext(new MinimumProponentQuantityValidator())
                 .SetNext(new MainProponentQuantityValidator())
                 .SetNext(new ProponentAgeValidator())
                 .SetNext(new WarrantyQuantityValidator())
