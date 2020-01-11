@@ -25,12 +25,13 @@ namespace ProposalValidator.Domain.Test.Proposals.Validators
         [DataRow(2, false, "Deve haver exatamente 1 proponente principal")]
         public void Deveria_validar_corretamente_a_quantidade_de_proponente_por_proposta(int mainProponentQuantity, bool expected, String because)
         {
-            var proposal = new Proposal(Guid.NewGuid(), 0, 0);
-
-            proposal.Proponents =
+            var proposal = new Proposal(Guid.NewGuid(), 0, 0)
+            {
+                Proponents =
                 Enumerable.Range(0, mainProponentQuantity)
                 .Select(x => new Proponent() { IsMain = true })
-                .ToList();
+                .ToList()
+            };
 
             var isValid = _mainProponentQuantityValidator.Validate(proposal);
 

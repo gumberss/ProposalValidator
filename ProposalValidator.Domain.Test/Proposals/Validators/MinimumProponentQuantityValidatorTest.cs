@@ -25,12 +25,13 @@ namespace ProposalValidator.Domain.Test.Proposals.Validators
         [DataRow(3, true, "Quantidade de proponentes é superior a quantidade minima permitida")]
         public void Deveria_validar_corretamente_a_quantidade_de_proponente_por_proposta(int proponentQuantity, bool expected, String because)
         {
-            var proposal = new Proposal(Guid.NewGuid(), 0, 0);
-
-            proposal.Proponents =
+            var proposal = new Proposal(Guid.NewGuid(), 0, 0)
+            {
+                Proponents =
                 Enumerable.Range(0, proponentQuantity)
-                .Select(x => new Proponent())
-                .ToList();
+                .Select(_ => new Proponent())
+                .ToList()
+            };
 
             var isValid = _minimumProponentQuantityValidator.Validate(proposal);
 
