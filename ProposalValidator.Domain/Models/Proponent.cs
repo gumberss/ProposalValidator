@@ -10,7 +10,7 @@ namespace ProposalValidator.Domain.Models
 
         public int Age { get; set; }
 
-        public int MonthlyIncome { get; set; }
+        public decimal MonthlyIncome { get; set; }
 
         public bool IsMain { get; set; }
     }

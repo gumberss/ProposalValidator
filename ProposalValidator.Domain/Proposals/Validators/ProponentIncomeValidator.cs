@@ -8,15 +8,19 @@ namespace ProposalValidator.Domain.Proposals.Validators
         {
             var mainProponent = proposal.MainProponent();
 
+            var installmentQuantity = proposal.NumberOfMonthlyInStallments;
+
+            var installmentValue = proposal.LoanValue / installmentQuantity;
+
             if (mainProponent == null) return false;
 
-            if (mainProponent.Age < 24 && mainProponent.MonthlyIncome * 4 < proposal.LoanValue)
+            if (mainProponent.Age < 24 && mainProponent.MonthlyIncome < installmentValue * 4)
                 return false;
 
-            if (mainProponent.Age < 50 && mainProponent.MonthlyIncome * 3 < proposal.LoanValue)
+            if (mainProponent.Age < 50 && mainProponent.MonthlyIncome < installmentValue * 3)
                 return false;
 
-            if (mainProponent.Age >= 50 && mainProponent.MonthlyIncome * 2 < proposal.LoanValue)
+            if (mainProponent.Age >= 50 && mainProponent.MonthlyIncome < installmentValue * 2)
                 return false;
 
             return true;

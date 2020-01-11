@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using ProposalValidator.Domain.Models;
 
 namespace ProposalValidator.Domain.Proposals.Validators

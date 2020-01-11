@@ -5,7 +5,6 @@ using ProposalValidator.Domain.Proposals.Validators;
 using ProposalValidator.Domain.Test.Catagories;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ProposalValidator.Domain.Test.Proposals.Validators
 {
