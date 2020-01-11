@@ -1,4 +1,6 @@
-﻿using ProposalValidator.Domain.Models;
+﻿using ProposalValidator.Domain.Interfaces;
+using ProposalValidator.Domain.Models;
+using ProposalValidator.Domain.Proposals.Events.Filters;
 using ProposalValidator.Domain.Proposals.Validators;
 using ProposalValidator.Domain.Proposals.Validators.Events;
 using System;
@@ -13,16 +15,19 @@ namespace ProposalValidator.Handler.Handlers
         {
             List<Proposal> proposals = new List<Proposal>();
 
-            var events = stringEvents.Select(stringEvent => Event.Create(stringEvent));
+            var events = stringEvents
+                .Select(stringEvent => Event.Create(stringEvent));
 
-            var distictEvents = events
-                .GroupBy(x => x.Id)
-                .Select(x => x.First())
-                .GroupBy(x => new { x.Schema, x.Action })
-                .SelectMany(x => x.Key.Action == "updated" ? new[] { x.OrderBy(y => y.Timestamp).First() } : x.ToArray())
+            IEventFilter filter = new EventFilterAnd(
+                new EventFilterById(),
+                new EventFilterByDate()
+            );
+
+            var filteredEvents = filter
+                .Filter(events)
                 .ToList();
 
-            distictEvents.ForEach(evt => evt.Change(ref proposals));
+            filteredEvents.ForEach(evt => evt.Change(ref proposals));
 
             BaseValidator validatorChain = new LoanValueValidator();
 
