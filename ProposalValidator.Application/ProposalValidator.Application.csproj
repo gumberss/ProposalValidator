@@ -5,4 +5,8 @@
     <Authors>Gustavo Marin Suppi</Authors>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ProposalValidator.Domain\ProposalValidator.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

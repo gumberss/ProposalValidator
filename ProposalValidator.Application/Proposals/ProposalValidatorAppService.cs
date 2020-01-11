@@ -1,4 +1,5 @@
-﻿using ProposalValidator.Domain.Interfaces;
+﻿using ProposalValidator.Application.Interfaces;
+using ProposalValidator.Domain.Interfaces;
 using ProposalValidator.Domain.Models;
 using ProposalValidator.Domain.Proposals.Events.Filters;
 using ProposalValidator.Domain.Proposals.Validators;
@@ -7,11 +8,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ProposalValidator.Handler.Handlers
+namespace ProposalValidator.Application.Proposals
 {
-    public class HandleEvents
+    public class ProposalValidatorAppService : IProposalValidatorAppService
     {
-        public void Handle(String[] stringEvents)
+        public IEnumerable<Proposal> Validate(String[] stringEvents)
         {
             List<Proposal> proposals = new List<Proposal>();
 
@@ -27,7 +28,7 @@ namespace ProposalValidator.Handler.Handlers
                 .Filter(events)
                 .ToList();
 
-            filteredEvents.ForEach(evt => evt.Change(ref proposals));
+            filteredEvents.ForEach(@event => @event.Change(ref proposals));
 
             BaseValidator validatorChain = new LoanValueValidator();
 
@@ -42,7 +43,8 @@ namespace ProposalValidator.Handler.Handlers
                 .SetNext(new ProponentIncomeValidator());
 
             var validProposals = proposals.Where(proposal => validatorChain.Validate(proposal));
-        }
 
+            return validProposals;
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ProposalValidator.Application\ProposalValidator.Application.csproj" />
     <ProjectReference Include="..\ProposalValidator.Domain\ProposalValidator.Domain.csproj" />
   </ItemGroup>
 

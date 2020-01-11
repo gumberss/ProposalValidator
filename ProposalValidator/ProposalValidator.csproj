@@ -6,4 +6,8 @@
     <Authors>Gustavo Marin Suppi</Authors>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ProposalValidator.Handler\ProposalValidator.Handler.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ProposalValidator.Application.Proposals;
+using ProposalValidator.Handler.Handlers;
+using System;
 
 namespace ProposalValidator
 {
@@ -6,7 +8,9 @@ namespace ProposalValidator
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var handler = new ProposalEventsHandler(new ProposalValidatorAppService());
+
+            Console.Write(handler.Handle(args));
         }
     }
 }
