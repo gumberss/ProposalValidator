@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ProposalValidator.Domain.Models;
 using ProposalValidator.Domain.Proposals.Validators;
+using ProposalValidator.Domain.Test.Catagories;
 using System;
 
 namespace ProposalValidator.Domain.Test.Proposals.Validators
@@ -17,6 +18,7 @@ namespace ProposalValidator.Domain.Test.Proposals.Validators
         }
 
         [DataTestMethod]
+        [TestCategory(TestCategories.VALIDATOR)]
         [DataRow(30_000.00, false, "O valor da proposta deve ser no mínimo maior que R$ 30.000,00")]
         [DataRow(3_000_000.00, false, "O valor da proposta deve ser menor que R$ 3.000.000,00")]
         [DataRow(30_000.01, true, "O valor da proposta é superior ao valor mínimo permitido")]

@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ProposalValidator.Domain.Models;
 using ProposalValidator.Domain.Proposals.Validators;
+using ProposalValidator.Domain.Test.Catagories;
 using System;
 using System.Linq;
 
@@ -18,6 +19,7 @@ namespace ProposalValidator.Domain.Test.Proposals.Validators
         }
 
         [DataTestMethod]
+        [TestCategory(TestCategories.VALIDATOR)]
         [DataRow(1, false, "Quantidade de proponentes é inferior a quantidade mínima permitida")]
         [DataRow(2, true, "Quantidade de proponentes é igual a quantidade mínima permitida")]
         [DataRow(3, true, "Quantidade de proponentes é superior a quantidade minima permitida")]

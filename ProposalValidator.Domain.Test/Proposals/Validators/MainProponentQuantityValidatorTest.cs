@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ProposalValidator.Domain.Models;
 using ProposalValidator.Domain.Proposals.Validators;
+using ProposalValidator.Domain.Test.Catagories;
 using System;
 using System.Linq;
 
@@ -18,6 +19,7 @@ namespace ProposalValidator.Domain.Test.Proposals.Validators
         }
 
         [DataTestMethod]
+        [TestCategory(TestCategories.VALIDATOR)]
         [DataRow(0, false, "Deve haver exatamente 1 proponente principal")]
         [DataRow(1, true, "Deve haver exatamente 1 proponente principal")]
         [DataRow(2, false, "Deve haver exatamente 1 proponente principal")]

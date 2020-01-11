@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ProposalValidator.Domain.Models;
 using ProposalValidator.Domain.Proposals.Validators;
+using ProposalValidator.Domain.Test.Catagories;
 using System;
 
 namespace ProposalValidator.Domain.Test.Proposals.Validators
@@ -17,6 +18,7 @@ namespace ProposalValidator.Domain.Test.Proposals.Validators
         }
 
         [DataTestMethod]
+        [TestCategory(TestCategories.VALIDATOR)]
         [DataRow(23, false, "A quantidade de messes para pagar o empréstimo é inferior ao mínimo aceito")]
         [DataRow(2 * 12, true, "O empréstimo deve ser pago no mínimo em 2 anos")]
         [DataRow(15 * 12, true, "O empréstimo pode ser pago em até 15 anos")]
