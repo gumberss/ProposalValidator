@@ -1,17 +1,19 @@
 ﻿using ProposalValidator.Domain.Models;
+using ProposalValidator.Domain.Proposals.Validators.Events;
+using System;
 using System.Collections.Generic;
 
 namespace ProposalValidator.Domain.Proposals.Events
 {
-    internal class ProponentAddedEvent : Event
+    public class ProponentRemovedEvent : Event
     {
-        public ProponentAddedEvent(string[] data) : base(data)
+        public ProponentRemovedEvent(string[] data) : base(data)
         {
         }
 
         public override void Change(ref List<Proposal> proposals)
         {
-            var newProponent = new Proponent();
+            throw new NotImplementedException();
         }
     }
 }

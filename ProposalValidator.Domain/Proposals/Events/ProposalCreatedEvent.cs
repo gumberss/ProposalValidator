@@ -2,11 +2,11 @@
 using System;
 using System.Collections.Generic;
 
-namespace ProposalValidator.Domain.Proposals.Validators.Events
+namespace ProposalValidator.Domain.Proposals.Events
 {
-    public class ProponentRemovedEvent : Event
+    public class ProposalCreatedEvent : Event
     {
-        public ProponentRemovedEvent(String[] data) : base(data)
+        public ProposalCreatedEvent(String[] data) : base(data)
         {
             ProposalLoanValue = decimal.Parse(data[5], _cultureInfo);
             ProposalNumberOfMonthlyInstallments = int.Parse(data[6]);

@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 
-namespace ProposalValidator.Domain.Proposals.Validators.Events
+namespace ProposalValidator.Domain.Proposals.Events
 {
     public abstract class Event
     {
@@ -23,7 +23,7 @@ namespace ProposalValidator.Domain.Proposals.Validators.Events
 
             return (schema, action) switch
             {
-                (SchemaConst.PROPOSAL, ActionsConst.CREATED) => new ProponentRemovedEvent(eventData),
+                (SchemaConst.PROPOSAL, ActionsConst.CREATED) => new ProposalCreatedEvent(eventData),
                 (SchemaConst.PROPOSAL, ActionsConst.UPDATED) => new ProposalUpdatedEvent(eventData),
                 (SchemaConst.PROPOSAL, ActionsConst.DELETED) => new ProposalDeletedEvent(eventData),
                 (SchemaConst.WARRANTY, ActionsConst.ADDED) => new WarrantyAddedEvent(eventData),

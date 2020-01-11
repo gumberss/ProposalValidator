@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using ProposalValidator.Domain.Models;
+using ProposalValidator.Domain.Proposals.Validators.Events;
 
-namespace ProposalValidator.Domain.Proposals.Validators.Events
+namespace ProposalValidator.Domain.Proposals.Events
 {
     internal class ProponentUpdatedEvent : Event
     {
