@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ProposalValidator.Domain.Proposals.Events
 {
-    internal class ProponentAddedEvent : Event
+    public class ProponentAddedEvent : Event
     {
         public ProponentAddedEvent(string[] data) : base(data)
         {

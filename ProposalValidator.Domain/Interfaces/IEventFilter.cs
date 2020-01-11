@@ -1,4 +1,4 @@
-﻿using ProposalValidator.Domain.Proposals.Validators.Events;
+﻿using ProposalValidator.Domain.Proposals.Events;
 using System.Collections.Generic;
 
 namespace ProposalValidator.Domain.Interfaces

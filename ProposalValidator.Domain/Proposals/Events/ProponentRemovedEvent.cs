@@ -1,5 +1,4 @@
 ﻿using ProposalValidator.Domain.Models;
-using ProposalValidator.Domain.Proposals.Validators.Events;
 using System;
 using System.Collections.Generic;
 

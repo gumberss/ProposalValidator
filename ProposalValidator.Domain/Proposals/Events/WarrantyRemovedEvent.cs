@@ -3,7 +3,7 @@ using ProposalValidator.Domain.Models;
 
 namespace ProposalValidator.Domain.Proposals.Events
 {
-    internal class WarrantyRemovedEvent : Event
+    public class WarrantyRemovedEvent : Event
     {
         public WarrantyRemovedEvent(string[] data) : base(data)
         {

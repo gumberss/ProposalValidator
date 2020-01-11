@@ -3,7 +3,7 @@ using ProposalValidator.Domain.Interfaces;
 using ProposalValidator.Domain.Models;
 using ProposalValidator.Domain.Proposals.Events.Filters;
 using ProposalValidator.Domain.Proposals.Validators;
-using ProposalValidator.Domain.Proposals.Validators.Events;
+using ProposalValidator.Domain.Proposals.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +14,6 @@ namespace ProposalValidator.Application.Proposals
     {
         public IEnumerable<Proposal> Validate(String[] stringEvents)
         {
-            List<Proposal> proposals = new List<Proposal>();
-
             var events = stringEvents
                 .Select(stringEvent => Event.Create(stringEvent));
 
@@ -27,6 +25,8 @@ namespace ProposalValidator.Application.Proposals
             var filteredEvents = filter
                 .Filter(events)
                 .ToList();
+
+            List<Proposal> proposals = new List<Proposal>();
 
             filteredEvents.ForEach(@event => @event.Change(ref proposals));
 

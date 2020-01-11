@@ -3,7 +3,7 @@ using ProposalValidator.Domain.Models;
 
 namespace ProposalValidator.Domain.Proposals.Events
 {
-    internal class ProposalUpdatedEvent : Event
+    public class ProposalUpdatedEvent : Event
     {
         public ProposalUpdatedEvent(string[] data) : base(data)
         {
