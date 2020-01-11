@@ -17,14 +17,11 @@ namespace ProposalValidator.Domain.Test.Proposals.Validators
         }
 
         [DataTestMethod]
-        [DataRow(30_000.00, false)]
-        [DataRow(20_000.00, false)]
-        [DataRow(3_000_000.00, false)]
-        [DataRow(4_000_000.00, false)]
-        [DataRow(30_000.01, true)]
-        [DataRow(2_999_999.99, true)]
-        [DataRow(2_000_000, true)]
-        public void Deveria_validar_corretamente_os_limites_dos_valores_aceitos_em_uma_proposta(double value, bool expected)
+        [DataRow(30_000.00, false, "O valor da proposta deve ser no mínimo maior que R$ 30.000,00")]
+        [DataRow(3_000_000.00, false, "O valor da proposta deve ser menor que R$ 3.000.000,00")]
+        [DataRow(30_000.01, true, "O valor da proposta é superior ao valor mínimo permitido")]
+        [DataRow(2_999_999.99, true, "O valor da proposta é inferior ao valor máximo permitido")]
+        public void Deveria_validar_corretamente_os_limites_dos_valores_aceitos_em_uma_proposta(double value, bool expected, string because)
         {
             var proposalValue = Convert.ToDecimal(value);
 
@@ -32,7 +29,7 @@ namespace ProposalValidator.Domain.Test.Proposals.Validators
 
             var isValid = _loanValueValidator.Validate(proposal);
 
-            isValid.Should().Be(expected);
+            isValid.Should().Be(expected, because: because);
         }
     }
 }
