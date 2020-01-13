@@ -37,18 +37,14 @@ namespace ProposalValidator.Domain.Test.Proposals.Validators
             var mainProponentIncome = Convert.ToDecimal(doubleMainProponentIncome);
             var installmentQuantity = 10;
 
-            var proposal = new Proposal(Guid.NewGuid(), loanValue, installmentQuantity)
-            {
-                Proponents = new List<Proponent>
+            var proposal =
+                new Proposal(Guid.NewGuid(), loanValue, installmentQuantity)
+                .Add(new Proponent
                 {
-                    new Proponent
-                    {
-                        IsMain = true,
-                        Age = mainProponentAge,
-                        MonthlyIncome = mainProponentIncome
-                    }
-                }
-            };
+                    IsMain = true,
+                    Age = mainProponentAge,
+                    MonthlyIncome = mainProponentIncome
+                });
 
             var isValid = _proponentIncomeValidator.Validate(proposal);
 

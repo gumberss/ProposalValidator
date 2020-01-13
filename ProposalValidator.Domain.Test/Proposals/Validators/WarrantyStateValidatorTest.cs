@@ -26,13 +26,9 @@ namespace ProposalValidator.Domain.Test.Proposals.Validators
         [DataRow("SP", true, "Garantias que não são dos estados de SC, PR e RS são permitidas")]
         public void Deveria_validar_corretamente_o_estado_das_garantias_de_imoveis(String warrantyProvince, bool expected, String because)
         {
-            var proposal = new Proposal(Guid.NewGuid(), 0, 0)
-            {
-                Warranties = new List<Warranty>
-                {
-                    new Warranty { Province = warrantyProvince }
-                }
-            };
+            var proposal = 
+                new Proposal(Guid.NewGuid(), 0, 0)
+                .Add(new Warranty { Province = warrantyProvince });
 
             var isValid = _warrantyStateValidator.Validate(proposal);
 
@@ -43,16 +39,12 @@ namespace ProposalValidator.Domain.Test.Proposals.Validators
         [TestCategory(TestCategories.VALIDATOR)]
         public void Deveria_invalidar_proposta_quando_qualquer_garantia_for_de_um_dos_estados_nao_permitidos()
         {
-            var proposal = new Proposal(Guid.NewGuid(), 0, 0)
-            {
-                Warranties = new List<Warranty>
-                {
-                    new Warranty { Province = "SP" },
-                    new Warranty { Province = "RJ" },
-                    new Warranty { Province = "SC" }
-                }
-            };
-
+            var proposal = 
+                new Proposal(Guid.NewGuid(), 0, 0)
+                .Add(new Warranty { Province = "SP" })
+                .Add(new Warranty { Province = "RJ" })
+                .Add(new Warranty { Province = "SC" });
+            
             var isValid = _warrantyStateValidator.Validate(proposal);
 
             isValid.Should().BeFalse(because: "Uma das garantias é de SC que é um estado não permitido");

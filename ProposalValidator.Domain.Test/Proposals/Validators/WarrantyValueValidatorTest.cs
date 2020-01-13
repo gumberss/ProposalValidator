@@ -28,13 +28,9 @@ namespace ProposalValidator.Domain.Test.Proposals.Validators
             var loanValue = Convert.ToDecimal(doubleLoanValue);
             var warrantyValue = Convert.ToDecimal(doubleWarrantyValue);
 
-            var proposal = new Proposal(Guid.NewGuid(), loanValue, 0)
-            {
-                Warranties = new List<Warranty>
-                {
-                    new Warranty() { Value = warrantyValue }
-                }
-            };
+            var proposal =
+                new Proposal(Guid.NewGuid(), loanValue, 0)
+                .Add(new Warranty() { Value = warrantyValue });
 
             var isValid = _warrantyValueValidator.Validate(proposal);
 
@@ -48,14 +44,10 @@ namespace ProposalValidator.Domain.Test.Proposals.Validators
             var loanValue = 20;
             var (firstWarrantyValue, secondWarrantyValue) = (30, 10);
 
-            var proposal = new Proposal(Guid.NewGuid(), loanValue, 0)
-            {
-                Warranties = new List<Warranty>
-                {
-                    new Warranty() { Value = firstWarrantyValue },
-                    new Warranty() { Value = secondWarrantyValue },
-                }
-            };
+            var proposal = 
+                new Proposal(Guid.NewGuid(), loanValue, 0)
+                .Add(new Warranty() { Value = firstWarrantyValue })
+                .Add(new Warranty() { Value = secondWarrantyValue });
 
             var isValid = _warrantyValueValidator.Validate(proposal);
 

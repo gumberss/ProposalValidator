@@ -6,55 +6,65 @@ namespace ProposalValidator.Domain.Models
 {
     public class Proposal
     {
-        public Proposal(Guid id, decimal loanValue, int numberOfMonthlyInStallments)
+        public Proposal(Guid id, decimal loanValue, int numberOfMonthlyInStallments, List<Proponent> proponents = null, List<Warranty> warranties = null)
         {
             Id = id;
             LoanValue = loanValue;
             NumberOfMonthlyInstallments = numberOfMonthlyInStallments;
 
-            Proponents = new List<Proponent>();
-            Warranties = new List<Warranty>();
+            Proponents = proponents ?? new List<Proponent>();
+            Warranties = warranties ?? new List<Warranty>();
         }
 
-        public Guid Id { get; set; }
+        public Guid Id { get; private set; }
 
-        public decimal LoanValue { get; set; }
+        public decimal LoanValue { get; private set; }
 
-        public int NumberOfMonthlyInstallments { get; set; }
+        public int NumberOfMonthlyInstallments { get; private set; }
 
-        public List<Proponent> Proponents { get; set; }
+        public List<Proponent> Proponents { get; private set; }
 
-        public List<Warranty> Warranties { get; set; }
+        public List<Warranty> Warranties { get; private set; }
 
         public Proponent MainProponent()
         {
             return Proponents.FirstOrDefault(x => x.IsMain);
         }
 
-        public void Update(decimal loanValue, int numberOfMonthlyInstallments)
+        public Proposal Update(decimal loanValue, int numberOfMonthlyInstallments)
         {
             LoanValue = loanValue;
             NumberOfMonthlyInstallments = numberOfMonthlyInstallments;
+
+            return this;
         }
 
-        public void Add(Proponent proponent)
+        public Proposal Add(Proponent proponent)
         {
             Proponents.Add(proponent);
+
+            return this;
         }
 
-        public void Add(Warranty warranty)
+        public Proposal Add(Warranty warranty)
         {
             Warranties.Add(warranty);
+
+            return this;
         }
 
-        public void RemoveProponentBy(Guid id)
+        public Proposal RemoveProponentBy(Guid id)
         {
             Proponents.RemoveAll(proponent => proponent.Id == id);
+
+            return this;
         }
 
-        public void RemoveWarrantyBy(Guid id)
+        public Proposal RemoveWarrantyBy(Guid id)
         {
             Warranties.RemoveAll(warranty => warranty.Id == id);
+
+            return this;
         }
     }
 }

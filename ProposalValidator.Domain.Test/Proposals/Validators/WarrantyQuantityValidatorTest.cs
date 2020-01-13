@@ -25,13 +25,12 @@ namespace ProposalValidator.Domain.Test.Proposals.Validators
         [DataRow(2, true, "O imóvel possui mais de uma garantia")]
         public void Deveria_validar_corretamente_a_quantidade_de_garantias_de_imovel_por_proposta(int warrantyQuantity, bool expected, String because)
         {
-            var proposal = new Proposal(Guid.NewGuid(), 0, 0)
-            {
-                Warranties =
+            var warranties = 
                 Enumerable.Range(0, warrantyQuantity)
                 .Select(_ => new Warranty())
-                .ToList()
-            };
+                .ToList();
+
+            var proposal = new Proposal(Guid.NewGuid(), 0, 0, warranties: warranties);
 
             var isValid = _warrantyQuantityValidator.Validate(proposal);
 
