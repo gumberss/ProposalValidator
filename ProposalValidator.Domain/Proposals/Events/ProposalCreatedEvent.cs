@@ -15,8 +15,8 @@ namespace ProposalValidator.Domain.Proposals.Events
             _proposalNumberOfMonthlyInstallments = int.Parse(data[PROPOSAL_NUMBER_OF_MONTHLY_INSTALLMENTS]);
         }
 
-        private decimal _proposalLoanValue { get; set; }
-        private int _proposalNumberOfMonthlyInstallments { get; set; }
+        private readonly decimal _proposalLoanValue;
+        private readonly int _proposalNumberOfMonthlyInstallments;
 
         public override void Change(ref List<Proposal> proposals)
         {

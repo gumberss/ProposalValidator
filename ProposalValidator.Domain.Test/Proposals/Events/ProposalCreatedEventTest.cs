@@ -20,7 +20,9 @@ namespace ProposalValidator.Domain.Test.Proposals.Events
             var proposalLoanValue = 100;
             var proposalNumberOfMonthlyInstallments = 36;
 
-            String stringEvent = $"{Guid.NewGuid()},proposal,created,{DateTime.Now},{proposalId},{proposalLoanValue},{proposalNumberOfMonthlyInstallments}";
+            var (schema, action) = ("proposal", "created");
+
+            String stringEvent = $"{Guid.NewGuid()},{schema},{action},{DateTime.Now},{proposalId},{proposalLoanValue},{proposalNumberOfMonthlyInstallments}";
 
             var @event = new ProposalCreatedEvent(stringEvent.Split(','));
 

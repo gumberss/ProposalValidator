@@ -35,7 +35,6 @@ namespace ProposalValidator.Domain.Test.Proposals.Events
             proposals.Should().HaveCount(2);
 
             proposals.Find(proposal => proposal.Id == proposalToRemoveId).Should().BeNull();
-
         }
     }
 }
