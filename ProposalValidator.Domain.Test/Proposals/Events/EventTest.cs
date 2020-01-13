@@ -66,6 +66,22 @@ namespace ProposalValidator.Domain.Test.Proposals.Events
 
         [TestMethod]
         [TestCategory(TestCategories.EVENT)]
+        public void Deveria_criar_corretamente_o_evento_de_atualizacao_de_garantia()
+        {
+            var (schema, action) = ("warranty", "updated");
+            var (warrantyId, warrantyValue, warrantyProvince) = (Guid.NewGuid(), 1000.21, "SC");
+
+            var stringEvent = $@"{Guid.NewGuid()},{schema},{action},{DateTime.Now},{Guid.NewGuid()},{warrantyId},{warrantyValue},{warrantyProvince}";
+
+            var @event = Event.Create(stringEvent);
+
+            @event.Should().BeOfType<WarrantyUpdatedEvent>();
+        }
+
+     
+
+        [TestMethod]
+        [TestCategory(TestCategories.EVENT)]
         public void Deveria_lancar_excecao_de_negocio_quando_nao_for_encontrado_o_evento_para_o_schema_e_action_fornecidos()
         {
             var stringEvent = $@"{Guid.NewGuid()},batman,robin,{DateTime.Now},{Guid.NewGuid()}";
