@@ -122,6 +122,19 @@ namespace ProposalValidator.Domain.Test.Proposals.Events
             @event.Should().BeOfType<ProponentUpdatedEvent>();
         }
 
+        [TestMethod]
+        [TestCategory(TestCategories.EVENT)]
+        public void Deveria_criar_corretamente_o_evento_de_remocao_de_proponente()
+        {
+            var (schema, action) = ("proponent", "removed");
+            var warrantyId = Guid.NewGuid();
+
+            var stringEvent = $@"{Guid.NewGuid()},{schema},{action},{DateTime.Now},{Guid.NewGuid()},{warrantyId}";
+
+            var @event = Event.Create(stringEvent);
+
+            @event.Should().BeOfType<ProponentRemovedEvent>();
+        }
 
         [TestMethod]
         [TestCategory(TestCategories.EVENT)]
