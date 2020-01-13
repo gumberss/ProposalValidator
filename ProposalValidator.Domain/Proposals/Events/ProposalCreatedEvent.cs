@@ -20,9 +20,8 @@ namespace ProposalValidator.Domain.Proposals.Events
 
         public override void Change(ref List<Proposal> proposals)
         {
-            Proposal newProposal = new Proposal(_proposalId, _proposalLoanValue, _proposalNumberOfMonthlyInstallments);
-
-            proposals.Add(newProposal);
+            proposals
+                .Add(new Proposal(_proposalId, _proposalLoanValue, _proposalNumberOfMonthlyInstallments));
         }
     }
 }

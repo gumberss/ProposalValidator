@@ -39,7 +39,7 @@ namespace ProposalValidator.Domain.Test.Proposals.Events
 
             var proposal = proposals.Find(proposal => proposal.Id == proposalToUpdateId);
             proposal.LoanValue.Should().Be(proposalToUpdateLoanValue);
-            proposal.NumberOfMonthlyInStallments.Should().Be(proposalToUpdateNumberOfMonthlyInstallments);
+            proposal.NumberOfMonthlyInstallments.Should().Be(proposalToUpdateNumberOfMonthlyInstallments);
         }
     }
 }

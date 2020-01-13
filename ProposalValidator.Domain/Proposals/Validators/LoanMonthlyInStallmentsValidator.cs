@@ -10,7 +10,7 @@ namespace ProposalValidator.Domain.Proposals.Validators
             var twoYears = 12 * 2;
             var fifteenYears = 12 * 15;
 
-            return proposal.NumberOfMonthlyInStallments >= twoYears && proposal.NumberOfMonthlyInStallments <= fifteenYears;
+            return proposal.NumberOfMonthlyInstallments >= twoYears && proposal.NumberOfMonthlyInstallments <= fifteenYears;
         }
     }
 }

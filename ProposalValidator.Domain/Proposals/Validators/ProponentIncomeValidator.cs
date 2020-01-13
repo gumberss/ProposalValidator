@@ -8,7 +8,7 @@ namespace ProposalValidator.Domain.Proposals.Validators
         {
             var mainProponent = proposal.MainProponent();
 
-            var installmentQuantity = proposal.NumberOfMonthlyInStallments;
+            var installmentQuantity = proposal.NumberOfMonthlyInstallments;
 
             var installmentValue = proposal.LoanValue / installmentQuantity;
 

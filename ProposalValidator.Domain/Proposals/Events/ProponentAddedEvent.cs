@@ -29,11 +29,9 @@ namespace ProposalValidator.Domain.Proposals.Events
 
         public override void Change(ref List<Proposal> proposals)
         {
-            var newProponent = new Proponent(_proponentId, _proponentName, _proponentAge, _proponentMonthlyIncome, _proponentIsMain);
-
-            var proposal = proposals.Find(proposal => proposal.Id == _proposalId);
-
-            proposal.Proponents.Add(newProponent);
+            proposals
+                .Find(proposal => proposal.Id == _proposalId)
+                .Add(new Proponent(_proponentId, _proponentName, _proponentAge, _proponentMonthlyIncome, _proponentIsMain));
         }
     }
 }

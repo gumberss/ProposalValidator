@@ -19,10 +19,9 @@ namespace ProposalValidator.Domain.Proposals.Events
 
         public override void Change(ref List<Proposal> proposals)
         {
-            var proposalToUpdate = proposals.Find(proposal => proposal.Id == _proposalId);
-
-            proposalToUpdate.LoanValue = _proposalLoanValue;
-            proposalToUpdate.NumberOfMonthlyInStallments = _proposalNumberOfMonthlyInstallments;
+            proposals
+                .Find(proposal => proposal.Id == _proposalId)
+                .Update(_proposalLoanValue, _proposalNumberOfMonthlyInstallments);
         }
     }
 }

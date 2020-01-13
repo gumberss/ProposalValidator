@@ -35,7 +35,7 @@ namespace ProposalValidator.Domain.Test.Proposals.Events
             var proposal = proposals.First();
             proposal.Id.Should().Be(proposalId);
             proposal.LoanValue.Should().Be(proposalLoanValue);
-            proposal.NumberOfMonthlyInStallments.Should().Be(proposalNumberOfMonthlyInstallments);
+            proposal.NumberOfMonthlyInstallments.Should().Be(proposalNumberOfMonthlyInstallments);
         }
     }
 }
