@@ -108,6 +108,20 @@ namespace ProposalValidator.Domain.Test.Proposals.Events
             @event.Should().BeOfType<ProponentAddedEvent>();
         }
 
+        [TestMethod]
+        [TestCategory(TestCategories.EVENT)]
+        public void Deveria_criar_corretamente_o_evento_de_atualizacao_de_proponente()
+        {
+            var (schema, action) = ("proponent", "updated");
+            var (warrantyId, warrantyValue, warrantyProvince) = (Guid.NewGuid(), 1000.21, "SC");
+
+            var stringEvent = $@"{Guid.NewGuid()},{schema},{action},{DateTime.Now},{Guid.NewGuid()},{warrantyId},{warrantyValue},{warrantyProvince}";
+
+            var @event = Event.Create(stringEvent);
+
+            @event.Should().BeOfType<ProponentUpdatedEvent>();
+        }
+
 
         [TestMethod]
         [TestCategory(TestCategories.EVENT)]
