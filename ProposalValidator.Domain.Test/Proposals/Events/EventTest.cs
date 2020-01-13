@@ -10,7 +10,6 @@ namespace ProposalValidator.Domain.Test.Proposals.Events
     [TestClass]
     public class EventTest
     {
-      
         [TestMethod]
         [TestCategory(TestCategories.EVENT)]
         public void Deveria_criar_corretamente_o_evento_de_criacao_de_proposta()
