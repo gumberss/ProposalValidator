@@ -92,6 +92,22 @@ namespace ProposalValidator.Domain.Test.Proposals.Events
             @event.Should().BeOfType<WarrantyRemovedEvent>();
         }
 
+        [TestMethod]
+        [TestCategory(TestCategories.EVENT)]
+        public void Deveria_criar_corretamente_o_evento_de_adicao_de_proponente()
+        {
+            var (schema, action) = ("proponent", "added");
+            var (proponentId, proponentName, proponentAge) = (Guid.NewGuid(), 1000.21, 30);
+            var (proponentMonthlyIncome, proponentIsMain) = (2000, true);
+
+            var stringEvent = $"{Guid.NewGuid()},{schema},{action},{DateTime.Now},{Guid.NewGuid()}," +
+                $"{proponentId},{proponentName},{proponentAge},{proponentMonthlyIncome},{proponentIsMain}";
+
+            var @event = Event.Create(stringEvent);
+
+            @event.Should().BeOfType<ProponentAddedEvent>();
+        }
+
 
         [TestMethod]
         [TestCategory(TestCategories.EVENT)]
