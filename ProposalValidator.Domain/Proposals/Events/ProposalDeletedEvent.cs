@@ -11,11 +11,7 @@ namespace ProposalValidator.Domain.Proposals.Events
 
         public override void Change(ref List<Proposal> proposals)
         {
-            var removedProposal = proposals.Find(proposal => proposal.Id == _proposalId);
-
-            proposals.Remove(removedProposal);
-
-            //Or: proposals = proposals.Where(x => x.Id != _proposalId).ToList(); //If you want
+            proposals.RemoveAll(proposal => proposal.Id == _proposalId);
         }
     }
 }
