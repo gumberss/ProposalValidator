@@ -17,7 +17,7 @@ namespace ProposalValidator.Domain.Test.Proposals.Validators
         {
             _mainProponentQuantityValidator = new MainProponentQuantityValidator();
         }
-
+    
         [DataTestMethod]
         [TestCategory(TestCategories.VALIDATOR)]
         [DataRow(0, false, "Deve haver exatamente 1 proponente principal")]

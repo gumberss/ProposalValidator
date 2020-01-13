@@ -10,27 +10,10 @@ namespace ProposalValidator.Domain.Test.Proposals.Events
     [TestClass]
     public class EventTest
     {
-        [DataTestMethod]
-        [TestCategory(TestCategories.EVENT)]
-        [DataRow("warranty", "added", typeof(WarrantyAddedEvent))]
-        [DataRow("warranty", "updated", typeof(WarrantyUpdatedEvent))]
-        [DataRow("warranty", "removed", typeof(WarrantyRemovedEvent))]
-
-        [DataRow("proponent", "added", typeof(ProponentAddedEvent))]
-        [DataRow("proponent", "updated", typeof(ProponentUpdatedEvent))]
-        [DataRow("proponent", "removed", typeof(ProponentRemovedEvent))]
-        public void Deveria_criar_corretamente_os_eventos(String schema, String action, Type expected)
-        {
-            var stringEvent = $@"{Guid.NewGuid()},{schema},{action},{DateTime.Now},{Guid.NewGuid()},1,1,1,1,1,1,1,1,1,1,1,1,1,1";
-
-            var @event = Event.Create(stringEvent);
-
-            @event.Should().BeAssignableTo(expected);
-        }
-
+      
         [TestMethod]
         [TestCategory(TestCategories.EVENT)]
-        public void Deveria_criar_corretamente_os_evento_de_criacao_de_proposta()
+        public void Deveria_criar_corretamente_o_evento_de_criacao_de_proposta()
         {
             var (schema, action) = ("proposal", "created");
 
@@ -43,7 +26,7 @@ namespace ProposalValidator.Domain.Test.Proposals.Events
 
         [TestMethod]
         [TestCategory(TestCategories.EVENT)]
-        public void Deveria_criar_corretamente_os_evento_de_atualizacao_de_proposta()
+        public void Deveria_criar_corretamente_o_evento_de_atualizacao_de_proposta()
         {
             var (schema, action) = ("proposal", "updated");
 
@@ -56,7 +39,7 @@ namespace ProposalValidator.Domain.Test.Proposals.Events
 
         [TestMethod]
         [TestCategory(TestCategories.EVENT)]
-        public void Deveria_criar_corretamente_os_evento_de_exclusao_de_proposta()
+        public void Deveria_criar_corretamente_o_evento_de_exclusao_de_proposta()
         {
             var (schema, action) = ("proposal", "deleted");
 
@@ -65,6 +48,20 @@ namespace ProposalValidator.Domain.Test.Proposals.Events
             var @event = Event.Create(stringEvent);
 
             @event.Should().BeOfType<ProposalDeletedEvent>();
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategories.EVENT)]
+        public void Deveria_criar_corretamente_o_evento_de_adicao_de_garantia()
+        {
+            var (schema, action) = ("warranty", "added");
+            var (warrantyId, warrantyValue, warrantyProvince) = (Guid.NewGuid(), 1000.21, "SC");
+
+            var stringEvent = $@"{Guid.NewGuid()},{schema},{action},{DateTime.Now},{Guid.NewGuid()},{warrantyId},{warrantyValue},{warrantyProvince}";
+
+            var @event = Event.Create(stringEvent);
+
+            @event.Should().BeOfType<WarrantyAddedEvent>();
         }
 
         [TestMethod]
