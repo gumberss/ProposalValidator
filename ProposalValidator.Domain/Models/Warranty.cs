@@ -6,7 +6,7 @@ namespace ProposalValidator.Domain.Models
     {
         public Warranty() { }
 
-        public Warranty(Guid id, decimal value, string province)
+        public Warranty(Guid id, decimal value, String province)
         {
             Id = id;
             Value = value;
@@ -18,5 +18,13 @@ namespace ProposalValidator.Domain.Models
         public decimal Value { get; set; }
 
         public String Province { get; set; }
+
+        public Warranty Update(decimal value, String province)
+        {
+            Value = value;
+            Province = province;
+
+            return this;
+        }
     }
 }

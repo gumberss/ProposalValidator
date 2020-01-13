@@ -6,15 +6,16 @@ using ProposalValidator.Domain.Test.Catagories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace ProposalValidator.Domain.Test.Proposals.Events
 {
     [TestClass]
-    public class WarrantyAddedEventTest
+    public class WarrantyUpdatedEventTest
     {
         [TestMethod]
         [TestCategory(TestCategories.EVENT)]
-        public void Deveria_adicionar_o_garantia_recebido_na_proposta()
+        public void Deveria_atualizar_o_garantia_recebido_na_proposta()
         {
             var proposalId = Guid.NewGuid();
             var warrantyId = Guid.NewGuid();
@@ -24,18 +25,19 @@ namespace ProposalValidator.Domain.Test.Proposals.Events
             List<Proposal> proposals = new List<Proposal>()
             {
                 new Proposal(proposalId, 0, 0)
+                .Add(new Warranty(warrantyId, 0, "Batman"))
             };
 
-            String stringEvent = $"{Guid.NewGuid()},proposal,created,{DateTime.Now},{proposalId}," +
+            String stringEvent = $"{Guid.NewGuid()},proposal,updated,{DateTime.Now},{proposalId}," +
                 $"{warrantyId},{warrantyValue},{warrantyProvince}";
 
-            var @event = new WarrantyAddedEvent(stringEvent.Split(','));
+            var @event = new WarrantyUpdatedEvent(stringEvent.Split(','));
 
             @event.Change(ref proposals);
 
             var proposal = proposals.First();
 
-            proposal.Warranties.Should().HaveCount(1, because: "Deve adicionar um garantia na proposta");
+            proposal.Warranties.Should().HaveCount(1);
 
             var warranty = proposal.Warranties.First();
             warranty.Id.Should().Be(warrantyId);
