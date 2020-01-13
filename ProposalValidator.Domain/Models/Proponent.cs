@@ -24,5 +24,15 @@ namespace ProposalValidator.Domain.Models
         public decimal MonthlyIncome { get; set; }
 
         public bool IsMain { get; set; }
+
+        public Proponent Update(String name, int age, decimal monthlyIncome, bool isMain)
+        {
+            Name = name;
+            Age = age;
+            MonthlyIncome = monthlyIncome;
+            IsMain = isMain;
+
+            return this;
+        }
     }
 }

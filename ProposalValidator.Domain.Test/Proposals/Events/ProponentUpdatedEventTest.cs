@@ -6,16 +6,15 @@ using ProposalValidator.Domain.Test.Catagories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace ProposalValidator.Domain.Test.Proposals.Events
 {
     [TestClass]
-    public class ProponentAddedEventTest
+    public class ProponentUpdatedEventTest
     {
         [TestMethod]
         [TestCategory(TestCategories.EVENT)]
-        public void Deveria_adicionar_o_proponente_recebido_na_proposta()
+        public void Deveria_atualizar_o_proponente_recebido_na_proposta()
         {
             var proposalId = Guid.NewGuid();
             var proponentId = Guid.NewGuid();
@@ -24,22 +23,23 @@ namespace ProposalValidator.Domain.Test.Proposals.Events
             var proponentMonthlyIncome = 3_000M;
             var proponentIsMain = true;
 
-            List<Proposal> proposals = new List<Proposal>()
+            List<Proposal> proposals = new List<Proposal>() 
             {
                 new Proposal(proposalId, 0, 0)
+                .Add(new Proponent(proponentId, "old", 0, 0, false))
             };
 
             String stringEvent = $"{Guid.NewGuid()},proposal,created,{DateTime.Now},{proposalId}," +
                 $"{proponentId},{proponentName},{proponentAge},{proponentMonthlyIncome},{proponentIsMain}";
 
-            var @event = new ProponentAddedEvent(stringEvent.Split(','));
+            var @event = new ProponentUpdatedEvent(stringEvent.Split(','));
 
             @event.Change(ref proposals);
 
             var proposal = proposals.First();
 
-            proposal.Proponents.Should().HaveCount(1, because: "Deve adicionar um proponente na proposta");
-            
+            proposal.Proponents.Should().HaveCount(1);
+
             var proponent = proposal.Proponents.First();
             proponent.Id.Should().Be(proponentId);
             proponent.Name.Should().Be(proponentName);

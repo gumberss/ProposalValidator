@@ -66,5 +66,15 @@ namespace ProposalValidator.Domain.Models
 
             return this;
         }
+
+        public Proponent FindProponent(Predicate<Proponent> match)
+        {
+            return Proponents.Find(match);
+        }
+
+        public Warranty FindWarranty(Predicate<Warranty> match)
+        {
+            return Warranties.Find(match);
+        }
     }
 }
