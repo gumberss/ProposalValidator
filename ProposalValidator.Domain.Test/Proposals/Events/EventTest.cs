@@ -78,7 +78,20 @@ namespace ProposalValidator.Domain.Test.Proposals.Events
             @event.Should().BeOfType<WarrantyUpdatedEvent>();
         }
 
-     
+        [TestMethod]
+        [TestCategory(TestCategories.EVENT)]
+        public void Deveria_criar_corretamente_o_evento_de_remocao_de_garantia()
+        {
+            var (schema, action) = ("warranty", "removed");
+            var warrantyId = Guid.NewGuid();
+
+            var stringEvent = $@"{Guid.NewGuid()},{schema},{action},{DateTime.Now},{Guid.NewGuid()},{warrantyId}";
+
+            var @event = Event.Create(stringEvent);
+
+            @event.Should().BeOfType<WarrantyRemovedEvent>();
+        }
+
 
         [TestMethod]
         [TestCategory(TestCategories.EVENT)]
