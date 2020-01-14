@@ -18,12 +18,7 @@ namespace ProposalValidator.Domain.Proposals.Validators
             return isValid;
         }
 
-        public BaseValidator SetNext(BaseValidator validator)
-        {
-            _next = validator;
-
-            return _next;
-        }
+        public BaseValidator SetNext(BaseValidator validator) => _next = validator;
         
         protected abstract bool ValitationWrapper(Proposal proposal);
 
