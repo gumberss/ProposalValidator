@@ -13,9 +13,7 @@ namespace ProposalValidator.Domain.Proposals.Events.Filters
             _filters = filters;
         }
 
-        public IEnumerable<Event> Filter(IEnumerable<Event> events)
-        {
-            return _filters.Aggregate(events, (aggregate, filter) => filter.Filter(events));
-        }
+        public IEnumerable<Event> Filter(IEnumerable<Event> events) 
+            => _filters.Aggregate(events, (aggregate, filter) => filter.Filter(events));
     }
 }
