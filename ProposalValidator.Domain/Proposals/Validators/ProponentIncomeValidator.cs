@@ -14,16 +14,13 @@ namespace ProposalValidator.Domain.Proposals.Validators
 
             if (mainProponent == null) return false;
 
-            if (mainProponent.Age < 24 && mainProponent.MonthlyIncome < installmentValue * 4)
-                return false;
-
-            if (mainProponent.Age < 50 && mainProponent.MonthlyIncome < installmentValue * 3)
-                return false;
-
-            if (mainProponent.Age >= 50 && mainProponent.MonthlyIncome < installmentValue * 2)
-                return false;
-
-            return true;
+            return (mainProponent.Age, mainProponent.MonthlyIncome) switch
+            {
+                var (age, monthlyIncome) when age < 24 && monthlyIncome < installmentValue * 4 => false,
+                var (age, monthlyIncome) when age < 50 && monthlyIncome < installmentValue * 3 => false,
+                var (age, monthlyIncome) when age >= 50 && monthlyIncome < installmentValue * 2 => false,
+                _ => true
+            };
         }
     }
 }
