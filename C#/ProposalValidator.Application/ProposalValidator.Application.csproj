@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <Authors>Gustavo Marin Suppi</Authors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProposalValidator.Domain\ProposalValidator.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
