@@ -22,3 +22,7 @@
   (let [warranties-total-value (->> warranties (map :value) (reduce +))
         two-times-loan (* 2 (:value loan))]
     (>= warranties-total-value two-times-loan)))
+
+(s/defn accepted-warranties-states? :- s/Bool
+  [{:keys [warranties]} :- Proposal]
+  (not (some (comp #{"PR" "SC" "RS"} :fu) warranties)))
