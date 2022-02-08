@@ -38,4 +38,7 @@
         (is (false? (l/accepted-loan? loan))))
       (with-redefs [l/accepted-monthly-installments-count? (fn [_loan] true)
                     l/accepted-value? (fn [_loan] false)]
+        (is (false? (l/accepted-loan? loan))))
+      (with-redefs [l/accepted-monthly-installments-count? (fn [_loan] false)
+                    l/accepted-value? (fn [_loan] false)]
         (is (false? (l/accepted-loan? loan)))))))
