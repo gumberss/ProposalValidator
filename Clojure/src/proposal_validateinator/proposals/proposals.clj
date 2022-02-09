@@ -26,3 +26,12 @@
 (s/defn accepted-warranties-states? :- s/Bool
   [{:keys [warranties]} :- Proposal]
   (not (some (comp #{"PR" "SC" "RS"} :fu) warranties)))
+
+(s/defn valid-main-income? :- s/Bool
+  [{:keys [loan proponents]} :- Proposal]
+  (let [{:keys [age income]} (p/main proponents)
+        loan-value (:value loan)]
+    (cond
+      (> age 50) (>= income (* 2 loan-value))
+      (>= age 24) (>= income (* 3 loan-value))
+      true (>= income (* 4 loan-value)))))

@@ -1,7 +1,8 @@
 (ns proposal-validateinator.proposals.proposals-tests
   (:require [clojure.test :refer :all]
             [schema.core :as s]
-            [proposal-validateinator.proposals.proposals :as p]))
+            [proposal-validateinator.proposals.proposals :as p]
+            [proposal-validateinator.proposals.proponents :as pn]))
 
 (def proposal
   {:loan       {:value 0 :monthly-installments-count 0}
@@ -11,7 +12,7 @@
 (deftest at-least-two-proponents?
   (s/with-fn-validation
     (testing "Should have at least two proponents in a proposal"
-      (let [a-proponent {:main true :age 0}]
+      (let [a-proponent {:main true :age 0 :income 0}]
         (are [result proposal proponents]
           (let [proposal (assoc-in proposal [:proponents] proponents)]
             (= result (p/at-least-two-proponents? proposal)))
@@ -62,3 +63,23 @@
           false proposal [rs-warranty]
           false proposal [sc-warranty]
           false proposal [pr-warranty])))))
+
+
+(deftest valid-main-income?
+  (s/with-fn-validation
+    (testing "Should validate the main proponent income"
+      (are [result proponent-age proponent-income loan-value]
+        (let [main-proponent {:main true :age proponent-age :income proponent-income}
+              proposal (assoc-in proposal [:proponents] [main-proponent])
+              proposal (assoc-in proposal [:loan :value] loan-value)]
+          (with-redefs [pn/main (fn [_] main-proponent)]
+            (= result (p/valid-main-income? proposal))))
+        false 18 999.99 250
+        true 18 1000 250
+        false 23 999.99 250
+        false 24 999.98 333.33
+        true 24 999.99 333.33
+        false 49 1000 500
+        false 50 1000 500
+        true 51 1000 500
+        true 51 1500 500))))

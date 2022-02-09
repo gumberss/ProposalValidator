@@ -3,7 +3,12 @@
 
 (def Proponent
   {:main s/Bool
-   :age  s/Num})
+   :age  s/Num
+   :income s/Num})
+
+(s/defn main :- (s/maybe Proponent)
+  [proponents :- [Proponent]]
+  (first (filter #(:main %) proponents)))
 
 (s/defn only-one-main? :- s/Bool
   [proponents :- [Proponent]]
