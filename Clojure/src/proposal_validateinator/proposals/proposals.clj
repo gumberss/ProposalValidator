@@ -23,10 +23,6 @@
         two-times-loan (* 2 (:value loan))]
     (>= warranties-total-value two-times-loan)))
 
-(s/defn accepted-warranties-states? :- s/Bool
-  [{:keys [warranties]} :- Proposal]
-  (not (some (comp #{"PR" "SC" "RS"} :fu) warranties)))
-
 (s/defn valid-main-income? :- s/Bool
   [{:keys [loan proponents]} :- Proposal]
   (let [{:keys [age income]} (p/main proponents)
@@ -35,3 +31,17 @@
       (> age 50) (>= income (* 2 loan-value))
       (>= age 24) (>= income (* 3 loan-value))
       true (>= income (* 4 loan-value)))))
+
+(s/defn valid-proposal? :- s/Bool
+  [proposal :- Proposal validations :- [(s/make-fn-schema s/Bool s/Any)]]
+  (every? #(% proposal) validations))
+
+(s/defn proposal-validation-chain []
+  [(comp l/accepted-value? :loan)
+   (comp l/accepted-monthly-installments-count? :loan)
+   at-least-two-proponents?
+   (comp p/only-one-main? :proponents)
+   (comp p/all-over-age? :proponents)
+   at-least-one-warranty?
+   total-warranties-values-are-two-times-loan-value?
+   (comp w/accepted-warranties-states? :warranties)])
