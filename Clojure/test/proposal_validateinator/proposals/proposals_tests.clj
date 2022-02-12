@@ -1,9 +1,9 @@
 (ns proposal-validateinator.proposals.proposals-tests
   (:require [clojure.test :refer :all]
             [schema.core :as s]
-            [mockfn.macros :as mfn]
-            [mockfn.matchers :as matchers]
             [matcher-combinators.standalone :refer [match?]]
+            [proposal-validateinator.proposals.warranties :as w]
+            [proposal-validateinator.proposals.loans :as l]
             [proposal-validateinator.proposals.proposals :as p]
             [clojure.test.check.generators :as gen]
             [proposal-validateinator.proposals.proponents :as pn]))
@@ -78,3 +78,15 @@
       (let [validation-true-fn (fn [_] true)
             validation-false-fn (fn [_] false)]
         (is (match? false (p/valid-proposal? proposal [validation-true-fn validation-false-fn])))))))
+
+(deftest proposal-validation-chain
+  (s/with-fn-validation
+    (testing "Should validate if the chain is correct"
+      (= (comp l/accepted-value? :loan)
+         (comp l/accepted-monthly-installments-count? :loan)
+         at-least-two-proponents?
+         (comp pn/only-one-main? :proponents)
+         (comp pn/all-over-age? :proponents)
+         at-least-one-warranty?
+         total-warranties-values-are-two-times-loan-value?
+         (comp w/accepted-warranties-states? :warranties) (p/proposal-validation-chain)))))
