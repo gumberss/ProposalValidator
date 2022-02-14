@@ -5,7 +5,7 @@
             :url "https://www.eclipse.org/legal/epl-2.0/"}
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [prismatic/schema "1.2.0"]
-
+                 [clj-time "0.15.2"]
                  [nubank/mockfn "0.7.0"]
                  [nubank/matcher-combinators "3.3.1"]
                  [org.clojure/test.check "1.1.1"]]
