@@ -5,6 +5,7 @@
             [clj-time.core :as t])
   (:import (java.util UUID)))
 
+; Protocol?
 (deftest parse-event
   (s/with-fn-validation
     (testing "Should parse an event correctly"
